@@ -4,9 +4,12 @@ patched-fonts/Input*
 unpatched-sample-fonts/Input*
 casks/*
 archives/*
+temp_auto_push.bat
 private.cfg
 node_modules
 # Only apps should have lockfiles
 package-lock.json
 # generated *.uuid files
 *.uuid
+.gitignore
+branch_structure.json
