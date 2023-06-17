@@ -1,6 +1,7 @@
 temp-glyph-source-fonts/*
 temp/*
 patched-fonts/Input*
+check-fonts/*
 unpatched-sample-fonts/Input*
 casks/*
 archives/*
@@ -10,3 +11,11 @@ node_modules
 package-lock.json
 # generated *.uuid files
 *.uuid
+bin/scripts/name_parser/__pycache__/*
+bin/scripts/name_parser/log
+# This is just needed for the cheat sheet and not go into the repo:
+css/nerd-fonts-generated-removed.min.css
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+branch_structure.json

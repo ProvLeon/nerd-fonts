@@ -2,15 +2,43 @@
 
 **Working on your first Pull Request?** You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub][First PR]
 
-## How to contribute
+## How to contribute summary
 
-* Fork the project from the `master` branch and submit a Pull Request (PR)
+* Fork the project and submit a Pull Request (PR)
   * Explain what the PR fixes or improves
   * Screenshots for bonus points
 * Use sensible commit messages
   * If your PR fixes a separate issue number, include it in the commit message
 * Use a sensible number of commit messages as well
   * e.g. Your PR should not have 100s of commits
+  
+## How to add yourself to the contributors (give yourself attribution)
+
+Don't forget to give yourself credit! Make sure you add yourself to the contributors list that will eventually propagate to [NerdFonts.com](https://nerdfonts.com)
+
+Either:
+* Invoke the [@all-contributors bot](https://allcontributors.org/docs/en/bot/usage) by commenting on your Pull Request or Issue.
+* Shallow clone repo and execute `all-contributors add <YOUR_GITHUB_HANDLE> <CONTRIBUTION_TYPE>`
+
+Common types for this project include: `code`, `doc`, `translation`, `review` .For full list of contribution types see: https://allcontributors.org/docs/en/emoji-key
+
+## Steps for updating an existing font
+
+### 1. Update original (unpatched) version
+* Copy and replace the existing unpatched version of the font and any readme and/or license files in the `src/unpatched-fonts/XYZ-font` directory
+  * e.g. Updating *XYZ Font*, update files in directory `src/unpatched-fonts/xyz/{PUT FONT FILES HERE}`
+  * Make sure to update the correct subfolders for each font style (e.g. `src/unpatched-fonts/xyz/bold/{BOLD FONT FILES HERE}`)
+### 2. Execute basic testing
+* Do a basic test with the new font to ensure it patches correctly and generates a new font file, e.g.
+  * `fontforge --script ./font-patcher src/unpatched-fonts/XYZ/XYZ.ttf --complete`
+  * Make sure to then delete this new font file if it is in the repository (all patched fonts should be generated in the `patched-fonts` directory)
+### 3. Run build scripts
+* When fairly satisfied the font patches correctly, run the following scripts in this order:
+  * Copy all the unpatched readmes to the patched location with additional info on variations appended:
+    * `cd bin/scripts`
+    * `./standardize-and-complete-readmes.sh XYZ`
+  * Patch **all** of the variations/options, e.g.
+    * `./gotta-patch-em-all-font-patcher\!.sh XYZ`
 
 ## Steps for adding a new font or removing an existing font
 
@@ -19,12 +47,12 @@
 ### 1. Verify license
 * Check the license even allows the font to be modified and shared
 ### 2. Add original (unpatched) version
-* Add the unpatched version of the font and any readme and/or license files to the `unpatched-sample-fonts` directory inside a new directory
+* Add the unpatched version of the font and any readme and/or license files to the `src/unpatched-fonts/` directory inside a new directory
   * e.g. Adding *XYZ Font*, create directory `src/unpatched-fonts/xyz/{PUT FONT FILES HERE}`
   * Try to make subfolders for each font style (e.g. `src/unpatched-fonts/xyz/bold/{BOLD FONT FILES HERE}`)
 ### 3. Execute basic testing
 * Do a basic test with the new font to ensure it patches correctly and generates a new font file, e.g.
-  * `./font-patcher src/unpatched-fonts/XYZ/XYZ.ttf --complete`
+  * `fontforge --script ./font-patcher src/unpatched-fonts/XYZ/XYZ.ttf --complete`
   * Make sure to then delete this new font file if it is in the repository (all patched fonts should be generated in the `patched-fonts` directory)
 ### 4. Run build scripts
 * When fairly satisfied the font patches correctly, run the following scripts in this order:
@@ -46,9 +74,9 @@
 
 * Smaller Pull Requests are likely to be merged more quickly than bigger changes
 * This project is using a [KISS Workflow][]
-  * Pull Requests and bugfixes are directly merged into `master` after sanity testing
-  * `master` is basically consider the main developer branch
-    * We no longer wait to get changes into master when there is a release/milestone/version!
+  * Pull Requests and bugfixes are directly merged into the default branch after sanity testing
+  * The default branch is basically consider the main developer branch
+    * We no longer wait to get changes into the default branch when there is a release/milestone/version!
   * the release branches and version tags are considered stable and frozen
 * This project is using [Semantic Versioning 2.0.0](http://semver.org/)
   * If a bugfix or PR is *not* trivial it will likely end up in the next **MINOR** version
@@ -78,8 +106,8 @@
 <!-- link references -->
 
 [pulls]: https://github.com/ryanoasis/nerd-fonts/pulls
-[Features Section]: https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#features
-[Combinations Section]: https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#combinations
-[Patched Fonts]: https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#patched-fonts
+[Features Section]: https://github.com/ryanoasis/nerd-fonts/blob/-/readme.md#features
+[Combinations Section]: https://github.com/ryanoasis/nerd-fonts/blob/-/readme.md#combinations
+[Patched Fonts]: https://github.com/ryanoasis/nerd-fonts/blob/-/readme.md#patched-fonts
 [KISS Workflow]: https://github.com/ryanoasis/nerd-fonts/wiki/Development-Workflow#kiss-workflow
-[First PR]: https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github
+[First PR]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
