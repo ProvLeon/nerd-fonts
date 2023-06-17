@@ -2,6 +2,321 @@ CHANGELOG
 ================================================================================
 This project is using [Semantic Versioning 2.0.0](http://semver.org/)
 
+## v3.0.2
+
+**One general fix and some font specific ones**
+
+Note the breaking changes introduced with the `v3.0.0` release.
+If you miss icons, check #1190 and probably https://github.com/loichyan/nerdfix
+
+### Fixes
+ - Bugfix `Codicon` Circles #1261
+ - Fix `DaddyTimeMono NFM` #1244
+ - Fix `fsSelection` for `--has-no-italic` (`Bitstream Vera` + `DejaVu`) #1255
+ - Fix naming of some fonts of BlexMono and GohuFont
+
+### Features
+ - Allow not renaming the font #1282 for `Cascadia Code` self-patcher (#1242)
+ - Create `tar.xz` packs now automated #1235
+ - Improve cheat sheet @rszyma #1252 #1254
+ - `test-fonts.sh`: allow wrapping at any number by @hasecilu #1270
+
+## v3.0.1
+
+This bugfix release handles the following issues.
+
+### Fixes
+ - Revive some ligature removal (only of problematic ligs)
+ - Correct Octicons scale (of very few icons)
+ - Fix logging with AppImage `fontforge`
+ - Drop box-drawing glyphs from Symbols Only fonts
+ - Reintroduce upstream-dropped `oct-file-symlink-directory`
+ - Reintroduce old style `oct-file-directory` in `custom-`
+ - Fix wrong `fsSelection` bit
+ - Fix `fi` ligature in Ubuntu
+ - Fix scaling of heavy brackets (mostly in Nerd Font Mono)
+ - Fix Ubuntu Mono Condensed font property (upstream bug)
+ - Fix small scaling glitch for 4 Codicons
+ - Correct CaskaydiaCove's version string (which contains the autohinter)
+
+## v3.0.0
+
+This major release introduces some breaking changes:
+
+### Breaking 1: Naming
+
+This release fixes some long standing issues that are due to the naming of the fonts: There is a completely new naming scheme. This might be inconvientient for existing setups, sorry.
+ - Some fonts will have `Nerd Font` in the name while other have it abbreviated as `NF`. This is needed because some names just were too long. (Same for `Nerd Font Mono` and `NFM`.)
+ - There are no `Windows Compatible` fonts anymore. All fonts work on all platforms.
+ - The `Complete` from the font names (and the repo directories) has been dropped (Complete is the new normal).
+ - The name parts will be ordered as expected with style and weight last (`Somefont Bold Nerd Font` -> `Somefont Nerd Font Bold`).
+ - The filename will have no blanks anymore.
+
+### Breaking 2: Material Design Icons Codepoints
+
+The old Material Design Icon codepoints are finally dropped. Due to an historic mistake we placed them in between some asiatic glyphs, breaking that script.
+Since v2.3.0 the (updated and expanded) Material Design Icons have new codepoints in the 5 digit region.
+ - Dropped codepoints `F500`... and class names `nf-mdi-*`
+ - New codepoints `F0001`... and class names `nf-md-*`
+ - The whole discussions are here: https://github.com/ryanoasis/nerd-fonts/issues/365
+ - A translation table is available here: https://github.com/ryanoasis/nerd-fonts/issues/1059#issuecomment-1404891287
+ - There are tools out there that probably can update your configuration.
+
+Otherwise this is a 'Update release', so now the good stuff:
+
+### Updates
+  - Update `Agave` to v37
+  - Update `Arimo` to 1.33
+  - Update `DaddyTimeMono` to 1.2.3
+  - Update `Fira Mono` to 3.206
+  - Update `Go Mono` to 2.010
+  - Update `Hermit` to 2.0
+  - Update `IBM Plex` to 2.3
+  - Update `Iosevka` to 22.1.0
+  - Update `Literation` to 2.1.5
+  - Update `Lilex` to 2.000
+  - Update `mononoki` to 1.6
+  - Update `MPlus` to ... current
+  - Update `Overpass` to 3.0.5
+  - Update `Roboto Mono` to 3.0
+  - Update `Source Code Pro` to 2.038
+  - Update `Terminus` to 4.49.2
+  - Update `Victor Mono` to 1.5.4
+  - Update the Octicons set to 18.3.0
+
+### Features
+  - New font `ComicShannsMono`
+  - New variant in release `Nerd Font Propo` for GUI usecases
+  - Patch in heavy angle brackets
+  - Patch in boxdrawing glyphs (if the font has no complete set)
+  - Repair Panose info if source font has broken data
+  - Reform PowerlineExtra sizing
+  - Autocreate a `FontPatcher.zip` from `HEAD`
+  - Create a json database with css names
+  - Disentangle `Iosevka` into two packets (one for `Iosevka Term`)
+  - Add option to manipulate `xAvgCharWidth` (needed rarely by self-patchers)
+  - Add option to allow italic-less fonts with oblique
+  - Add `--debug` and `--dry` to `font-patcher`
+  - Add logging into file to `font-patcher`
+  - Add `NERDFONTS` environment variable to transport options through `gotta-patch-em`
+
+### Improvements
+  - Fix `Caskaydia Code` height different to `Cascadia Code` (hinting problem) (font is now `ttf` instead of `otf`!)
+
+### Fixes
+  - Fix baseline to basline distance (line gap) for some fonts
+  - Fix weather icons cloud scaling
+  - Fix UniqueID of the fonts
+  - Fix `Bitstream Vera` name: Is now `Bitstrom Wera` due to licensing issue
+  - No fix, but: Drop support for Python 2
+
+## v2.3.3
+
+### Fixes
+  - Fix licenses in archives 8a749ab21
+  - Fix Nerd Fonts Symbols Only metrics 4939ac5
+
+## v2.3.2
+
+### Fixes
+  - Update `JetBrains Mono` to 2.304 c6b3b0841
+  - Cover alternate unicode encodings _(for Input Mono)_ by @nathanielevan #1058
+  - Fix some Nerd Font Mono too wide #1062
+  - Fix line gap calculation #1060
+
+## v2.3.1
+
+### Fixes
+  - Fix windows Mono family names with --makegroups f240e073
+
+## v2.3.0
+
+The `v2.3.x` release is an interim release that tackles a lot technical issues and some updates. It is the preparatory step for `v3.0.0` that will update 'everything' and introduce new concepts. See [#1074](https://github.com/ryanoasis/nerd-fonts/discussions/1074).
+
+### Features
+  - Process `TTC` files #783
+  - Preserve existing bitmaps #939
+  - Symbol scaling in nonmono (down to 2 'widths') #748
+  - Add New Material Design Icons to **its own region** by @earboxer #773
+  - Calculate line gap correctly #1060
+
+### Updates
+  - Update `Inconsolata` to v3.000 #775
+  - Update `3270font` to v3.0.1 #948
+  - Update `Mononoki` to 1.5 fec587385
+  - Update `Seti` glyph set #978
+  - Update `JetBrains Mono` by @rluvaton #1053
+
+### Improvements
+  - `install.sh --remove` #822
+  - Stable codepoints #778
+  - Add `-WindowsCompatibleOnly` on `install.ps1` by @ev-dev #841
+  - Sunset ligature removal #977
+  - Fix Iosevka Family names #1019
+  - Fix unequal weather icon scale #916
+  - Use Fontforge January 2023 Release #1037
+  - Warn if sourcefont is a variable font `VF` #960
+  - Improve Assembly icon by @ignamartinoli #990
+
+### Fixes
+  - Fix `fontconfig` #920
+  - Fix scaling related rounding error #921
+  - Fix hasklug ligature #938
+  - Avoid patching proportional sources #912
+  - Fix JetBrains Mono `!=` ligature #964
+  - Fix crash on some custom sets #1006
+  - Sanitize output filenames #1029
+  - Fix unexpected 'Book' SubFamily #1047
+  - Fix licenses in archives 8a749ab21
+  - Fix some Nerd Font Mono too wide #1045
+  - Fix line gap calculation #943
+
+### Next Release Outlook
+
+The `v3.0.0` release will bring two bigger changes:
+
+#### Material Design Icons
+The Material Design Icons have to move codepoints. Historically we patch them in between `F500` - `FD46`; but part of that range is needed for Chinese and other glyphs. With #773 and _Plan 5+_ of #365 their new home will be after `F0001`. And they grow considerably.
+
+The `v2.3.x` release has both, the 'old' and the 'new' codepoints to enable you an easier transision. **Please change** already **now** your prompts and other uses to the new codepoints. Release `v3.0.0` will finally drop the old codepoints (`F500` - `FD46`).
+
+#### Naming
+Naming will also change. The name parts will move to places where they are customarily expected (e.g. weight and style comes last). This will fix some more problems. Probably we will drop the `Complete` monicker, as ... everyone uses the complete versions, it just takes precious space in the names.
+The details are not fixed yet, follow [#1074](https://github.com/ryanoasis/nerd-fonts/discussions/1074) to keep up to date.
+
+## v2.2.2
+
+This makes all the prepached `Nerd Fonts` monospaced again, like v2.1.0 had it.
+
+### New Features
+
+  - Make Nerd Fonts Monospaced Again by @Finii in #764
+  - Add new icons:
+    - Add icons for Emacs and Orgmode by @ashfinal in #833
+    - Add Kotlin icon by @Finii in #862
+
+### Updates / Improvements
+
+  - Update Hasklig readme by @chezbgone in #910
+  - font-patcher:
+    - Correct python module missing message by @Finii in #798
+    - Do not overwrite glyphs that are needed for basic glyphs by @Finii in #914
+    - Correct mono scaling of thin glyphs by @Finii in #749
+    - Allow to specify custom symbolfont with absolute path by @Finii in #794
+    - Allow glyphs with altuni for exactEncoding by @Finii in #793
+
+## v2.2.1
+
+### Fixes
+
+  - Monospaced fonts wrong width (b71a9e474b4f2e8c416c32949e6c0f76949a14ee)
+
+## v2.2.0
+
+### New Features
+
+  - Add new fonts:
+    - Add Lilex font by @adavidzh in #474
+  - Add new icons:
+    - Add Crystal icon by @mamantoha in #429
+    - Add PureScript Icon by @andys8 in #545
+    - Add the official Puppet icon as a custom icon by @dhollinger in #652
+  - Add Docker support by @mdschweda in #449
+  - Add support for codicons by @cstrahan in #705
+  - Use fontforge 2022 for release by @Finii in #884
+
+### Updates / Improvements
+
+  - Update various fonts:
+    - Update Cascadia Code to its latest release by @LuanVSO in #433
+    - Update Cascadia Code to version 2007.01 by @natebwangsut in #499
+    - Update Cascadia to 2111.01 by @Finii in #723
+    - Update JetBrains Mono to 1.0.3 by @alindeman in #437
+    - Update JetBrains Mono to 1.0.5 by @alindeman in #459
+    - Update JetBrains Mono to version v2.001 by @moritzdietz in #518
+    - Update JetBrains Mono to version v2.210 by @moritzdietz in #540
+    - Update JetBrains Mono to version v2.225 by @moritzdietz in #572
+    - Update JetBrains Mono to version v2.242 by @moritzdietz in #648
+    - Update JetBrains Mono to version v2.251 by @moritzdietz in #776
+    - Upgrade Victor Mono to 1.4.1 by @ea2809 in #516
+    - Update Fira Code to v3.1 by @iamolivinius in #473
+    - Update Fira Code to latest version by @gitfool in #497
+    - Update Fira Code to latest version by @gitfool in #704
+    - Update Hasklig to v1.2 by @Tehnix in #555
+    - Update Iosevka font to 6.1.3 by @FollieHiyuki in #622
+  - Update Symbols-only fonts for #249 and #429 by @polyzen in #461
+  - Automatic symbols only font generation by @Finii in #801
+  - Update source icons:
+    - Update font-logos with new linux icons by @daniruiz in #551
+    - Update Font Logos to 1.0.1 by @Finii in #859
+  - Add new language translations:
+    - Add pt-pt language to readme.md by @LiTO773 in #431
+    - Add Hindi version of readme.md. by @HarshalRathore in #707
+  - font-patcher:
+    - Take the style from the filename if it's longer than the subfamily (fixes #257) by @duganchen in #526
+    - font-patcher: remove\_ligatures() never displays warnings by @fracsinus in #644
+    - Allow setting custom glyph storage directory by @epsilon-0 in #613
+    - Give meaningful error messages on trivial open fails by @Finii in #699
+    - Feature: correct small rendering by @Finii in #761
+  - Docu
+    - Add additional Archlinux links by @quinnjr in #462
+    - Add AppImage patching instructions to Readme by @adrian5 in #624
+    - Add sparse-checkout example to only clone one font by @vnys in #625
+    - List AUR packages for Jetbrains & Victor Mono by @avalonv in #887
+  - Allow running gotta-patch-em-all from any dir by @RL-S in #863
+
+### Fixes
+
+  - Fix #412 by @onokatio in #439
+  - CI's error by @get-me-power in #493
+  - Change bearing to int, since an int is expected by @WhyNotHugo in #471
+  - Add Caskyadia Mono to RFN replacements by @KexyBiscuit in #681
+  - Bugfix/fstype font does not open by @Finii in #687
+  - font-patcher: Use correct source font metrics by @Finii in #593
+  - font-patcher: Reintroduce fsType fix by @Finii in #692
+  - font-patcher: Set SFNT Version by @Finii in #693
+  - font-patcher: Remove obsolete metadata on glyph exchange by @Finii in #711
+  - font-patcher: Allow patching without --ext by @Finii in #720
+  - font-patcher: Improve 'Mono' compatibility with Windows by @Finii in #695
+  - font-patcher: Copy selection instead of continuously regenerating by @Finii in #736
+  - Handle TTCs gracefully by @Finii in #752
+  - Bugfix monospaced glyph scaling by @Finii in #732
+  - patcher: Fix grave (backtick) zero width by @Finii in #860
+  - Fix Noto too wide by @Finii in #830
+  - Docu
+    - Fix European Portuguese and Spanish translations errors by @gusbemacbe in #446
+    - Restore new line in README.ja by @delphinus in #447
+    - Update link to cheat sheet in readme's by @polyzen in #457
+    - Fix misleading note: Only for Linux & macOS (OS X) | Option 3: Install Script by @GiorgosXou in #671
+    - readme.md (et al): fix FQDN for input font (input.djr.com) by @atomicstack in #680
+    - Update command about Homebrew cask option by @ktanoooo in #689
+    - Replace non-existent polish words with other words that do exist in readme\_pl.md. by @MarcelskyXD in #710
+    - font info: Remove references to 'Terminess' from non-Terminus fonts by @Finii in #724
+    - Correct example patch call through fontforge [skip ci] by @Finii in #827
+    - Fix grammar mistakes in readme\_uk.md by @dev99problems in #853
+    - Fix (jetbrain-mono-font): installation guide by @GervinFung in #867
+  - Typos
+    - spelling: hermut -> hurmit by @Harwood in #537
+    - Fix homebrew cask tap command by @lepht in #525
+    - Fix typo in Cascadia Code README by @adrian5 in #529
+    - Fix typo: partcular -> particular by @alexislefebvre in #550
+    - Fix typo: partcular -> particular #550 by @alexislefebvre in #557
+    - Fix typo: orignal -> original by @pajlero in #737
+  - Update command for Mac OSX Homebrew install by @jesdavpet in #552
+  - Update contribution instructions with fontforge --script by @Tehnix in #554
+  - Link to gohu.eu is dead by @Skeeve in #567
+  - Brew cask install update by @JakobFerdinand in #611
+  - Fix ps installer by @fsackur in #570
+  - Docker:
+    - Update docker-entrypoint.sh by @diddledani in #654
+    - Consider .ttc in docker entrypoint by @kraftwerk28 in #664
+    - Update Dockerfile to use supported version of alpine and Python by @dgswilkins in #626
+    - Update Dockerfile to use latest alpine and py3-pip by @cmarincia in #684
+    - Fix Failing Docker Builds by @frankhinek in #882
+  - Update issue templates by @Finii in #782
+  - patch-em-all: Purge destination dirs if possible by @Finii in #787
+  - CI: Add Lilex to release by @Finii in #886
+
 ## v2.1.0
 
 ### New Features
